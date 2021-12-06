@@ -2,11 +2,12 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\tags;
+use App\Tags;
 use Faker\Generator as Faker;
 
-$factory->define(tags::class, function (Faker $faker) {
+$factory->define(Tags::class, function (Faker $faker) {
     return [
         //
+        'nombre' => $this->faker->word
     ];
 });

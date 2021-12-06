@@ -1,8 +1,9 @@
 <?php
-
+/* Mandamos a traer nuesto modelo */
+use App\Tags;
 use Illuminate\Database\Seeder;
-
-class TagsSeeder extends Seeder
+use Illuminate\Support\Facades\DB;
+class TagsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +12,10 @@ class TagsSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('tags')->insert([
+            'nombre' => String::random(10),
+            
+        ]);
     }
+ 
 }

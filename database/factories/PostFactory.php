@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\roles;
+use App\Model;
 use Faker\Generator as Faker;
 
-$factory->define(roles::class, function (Faker $faker) {
+$factory->define(Model::class, function (Faker $faker) {
     return [
         //
     ];
