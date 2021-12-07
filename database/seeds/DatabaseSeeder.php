@@ -1,11 +1,12 @@
 <?php
-use App\Images;
-/* importamos el modelo a ocupar category Model*/
+
+use Illuminate\Database\Seeder;
+//Llamamos a nuestro modelo
+use App\Tags;
+use App\Image;
 use App\Category;
 use App\Article;
-use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\BD;
-
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -15,16 +16,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-      /* definis la cantidad de registros que vamos a inserta en la BD */
-      $cantidadImages = 500; 
-      /* Hacemos la llamada a nuestro factory de tags y utilizamos el metodo create para inserta la cantidad
-      de datos a nuestra BD */
-          factory(Images::class,$cantidadImages)->create();
-          factory(Category::class,500)->create();
-          factory(Article::class,500)->create();
-              //$this->call(UsersTableSeeder::class);
-      }
-         //$this->call(UsersTableSeeder::class);
+        //Definimos la cantidad de registros que vamos a ingresar en la BD
+        $cantidadTags=200;
+        $cantidadImages=200;
+        //Hacemos la llamada a nuestro factory de tags y utilizamos el metodo create para insertar la cantidad de datos a nuestra BD
+        factory(Tags::class,$cantidadTags)->create();
+        factory(Image::class,$cantidadImages)->create();
+        factory(Category::class,200)->create();
+        factory(Article::class,200)->create();
+
+        // $this->call(UsersTableSeeder::class);
     }
+}
+
 
 

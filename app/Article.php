@@ -1,18 +1,12 @@
 <?php
 
 namespace App;
-use Illuminate\Database\Eloquent\SoftDeletes;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Category;
-use App\Images;
-/* Modelos a ocupar  */
-
-
 class Article extends Model
 {
-    use SoftDeletes;
-    /* declaramos nuestros campos de nuestra tabla tags*/    
+    /*     declaramos nuestros campos de nuestra tabla tags*/    
     protected $fillable = [
         'title',
         'img',
@@ -22,29 +16,15 @@ class Article extends Model
         'img_id',
     ];
 
-/* definindo la relacion de article and category one a one */
-    public  function category()
-    {
-        return $this->hasOne(Category::class,'foreign_key');
-
-
+    // Definimos la relacion de acticle y category uno a uno
+    public function Category(){
+        return $this->hasOne(Category::class);
     }
-
-/* definimos la relacion de imagenes  one a one  */
 
     public function Image(){
-        return $this->hasMany('App\Images', 'foreign_key', 'img_id');
+        return $this->hasOne(Image::class);
     }
-
-   /**
-    * Get the user that owns the Article
-    *
-    * @return 
-    
-    */
-   public function user(): BelongsTo
-   {
+    public function user(): BelongsTo{
        return $this->belongsTo(User::class);
    }
-
 }

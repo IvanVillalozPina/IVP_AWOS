@@ -2,68 +2,93 @@
 
 namespace App\Http\Controllers;
 /* Mandamos a llamar el modelo category */
-use App\Category;
+use App\category;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CategoryController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth','verified']);
-    } 
-    use SoftDeletes;
+        $this->middleware('auth');
+    }
     //
     /* vamos a obtener todas las categorua de nuestra base de datos ELOQUEN ORM
         Select * from categories  */
+    
     public function index(){
-        /* cambiamos la consulta all por patest paginate para la apginacion de nuestros registros */
-        $categories = Category::latest()->paginate(20);
+        $categories = Category::latest()->paginate(10);
         //return $categories;
         return view('categories.index',[
-        'categories'=> $categories,
+        'categories'=> $categories
         ]);
-
-
     }
-    /* insertar datos en la tabla category con el metodo create dentro de un array  */
-    public function store(Request $request){
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
         Category::create([
-
-            'name'=>$request->name
+            'name'=>$request->name,
         ]);
-        return redirect('/categories')->with('mesage', 'la categoria se ha agregado exitosamente!');
-
+        return redirect('/category')->with('message', 'La categoria se ha agregado exitosamente!');
     }
-
-    /* edit Category */
-        public function edit($id){
-            $category = Category::findOrFail($id);
-            //return $category;
-            return view('categories.edit',['category'=>$category]);
-
-        }
-        /* Update category */
-        public function update(Request $request, $id){
-          /*   $validateData = $request->validate([
-                'name' => 'required|max:5'
-            ]); */
-            $category = Category::findOrFail($id);
-
-            $category->update($request->all());
-       
-            //return back();
-
-            return redirect('/categories')->with('mesageUpdate', 'la categoria se ha modificado exitosamente!');
-
-        }        
-
-    /* eliminacion de */
     public function delete(Category $category){
-
         $category->delete();
-        return redirect('/category')->with('mesageDelete', 'la categoria se ha eliminado exitosamente!');
-
-
+        return redirect('/category')->with('alert', 'La categoria se ha eliminado exitosamente!');
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function edit($id){
+        $category = Category::findOrFaild($id);
+        return view('/category');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+    
 }

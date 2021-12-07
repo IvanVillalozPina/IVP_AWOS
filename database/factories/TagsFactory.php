@@ -8,6 +8,6 @@ use Faker\Generator as Faker;
 $factory->define(Tags::class, function (Faker $faker) {
     return [
         //
-        'nombre' => $this->faker->word
+        'nombre'=>$this->faker->word
     ];
 });

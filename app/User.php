@@ -5,11 +5,9 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Authenticatable  implements MustVerifyEmail
+class User extends Authenticatable
 {
-    use SoftDeletes;
     use Notifiable;
 
     /**
@@ -39,11 +37,9 @@ class User extends Authenticatable  implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function roles(){
-
-        return $this->belongsToMany('App\Roles'); 
+    public function role(){
+        return $this->belongsToMany('App\Role', 'role_user');
     }
-
     public function article(){
         return $this->hasMany(Articles::class);
     }
