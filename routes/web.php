@@ -56,7 +56,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('enviar',['as'=>'enviar', function(){
     $data= ['link'=>'https://digital-pineapple.com.mx'];
 
-    \Mail::send('emails.notificacion', $data, function($message){
+    Mail::send('emails.notificacion', $data, function($message){
         $message->from('ventas@digital-pineapple.com.mx', 'digital-pinneaple.com.mx');
         $message->to('dsm41@gmail.com')->subject('Este es mi primer correo con mailtrap desde laravel');
     });
